@@ -16,7 +16,7 @@ CreateThread(function()
                         if dist < 1 then
                             DrawText3D(v.Pos[i].x, v.Pos[i].y, v.Pos[i].z + 0.1, '[E] Posilovat')
                             if IsControlJustPressed(0, 38) then
-                                arms(v.Time)
+                                arms(v.Time, playerPed)
                             end
                         end
                     end
@@ -29,7 +29,7 @@ CreateThread(function()
                         if dist < 1 then
                             DrawText3D(v.Pos[i].x, v.Pos[i].y, v.Pos[i].z + 0.1, '[E] Posilovat')
                             if IsControlJustPressed(0, 38) then
-                                chins(v.Time)
+                                chins(v.Time, playerPed)
                             end
                         end
                     end
@@ -42,7 +42,7 @@ CreateThread(function()
                         if dist < 1 then
                             DrawText3D(v.Pos[i].x, v.Pos[i].y, v.Pos[i].z + 0.1, '[E] Klikovat')
                             if IsControlJustPressed(0, 38) then
-                                pushups(v.Time)
+                                pushups(v.Time, playerPed)
                             end
                         end
                     end
@@ -55,7 +55,7 @@ CreateThread(function()
                         if dist < 1 then
                             DrawText3D(v.Pos[i].x, v.Pos[i].y, v.Pos[i].z + 0.1, '[E] Sklapovat')
                             if IsControlJustPressed(0, 38) then
-                                situps(v.Time)
+                                situps(v.Time, playerPed)
                             end
                         end
                     end
@@ -110,8 +110,9 @@ function DrawText3D(x,y,z, text)
 	end
 end
 
-function arms(time)
-    local playerPed = PlayerPedId()
+function arms(time, playerPed)
+    time = time or 30000
+    playerPed = playerPed or PlayerPedId()
     TaskStartScenarioInPlace(playerPed, 'world_human_muscle_free_weights', 0, true)
     Wait(2500)
     exports['pogressBar']:drawBar(time, 'Posiluješ...')
@@ -120,8 +121,9 @@ function arms(time)
 end
 exports('arms', arms)
 
-function chins(time)
-    local playerPed = PlayerPedId()
+function chins(time, playerPed)
+    time = time or 30000
+    playerPed = playerPed or PlayerPedId()
     TaskStartScenarioInPlace(playerPed, 'prop_human_muscle_chin_ups', 0, true)
     Wait(2500)
     exports['pogressBar']:drawBar(time, 'Posiluješ...')
@@ -130,8 +132,9 @@ function chins(time)
 end
 exports('chins', chins)
 
-function situps(time)
-    local playerPed = PlayerPedId()
+function situps(time, playerPed)
+    time = time or 30000
+    playerPed = playerPed or PlayerPedId()
     TaskStartScenarioInPlace(playerPed, 'world_human_sit_ups', 0, true)
     Wait(2500)
     exports['pogressBar']:drawBar(time, 'Posiluješ...')
@@ -140,8 +143,9 @@ function situps(time)
 end
 exports('situps', situps)
 
-function pushups(time)
-    local playerPed = PlayerPedId()
+function pushups(time, playerPed)
+    time = time or 30000
+    playerPed = playerPed or PlayerPedId()
     TaskStartScenarioInPlace(playerPed, 'world_human_push_ups', 0, true)
     Wait(2500)
     exports['pogressBar']:drawBar(time, 'Posiluješ...')
